@@ -1,0 +1,3 @@
+<div>
+    Category page
+</div>
