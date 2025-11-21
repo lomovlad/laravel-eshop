@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <div class="owl-carousel owl-theme owl-carousel-full">
+                <div class="owl-carousel owl-theme owl-carousel-full" wire:ignore>
                     @foreach($newProducts as $product)
                         <div wire:key="{{ $product->id }}">
                             @include('includes.product-card')

@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/libs/owlcarousel/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/libs/owlcarousel/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="{{ asset('assets/libs/owlcarousel/owl.carousel.min.js') }}" defer></script>
+    <script src="{{ asset('assets/libs/toastr/toastr.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/main.js') }}" defer></script>
 </head>
 
@@ -181,13 +183,8 @@
                 </div>
 
                 <div>
-                    <button class="btn p-1" id="cart-open" type="button" data-bs-toggle="offcanvas2"
-                            data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="badge text-bg-warning cart-badge bg-warning rounded-circle">5</span>
-                    </button>
+                    <livewire:cart.cart-icon-component />
                 </div>
-
             </div>
         </nav>
     </div>
@@ -208,7 +205,8 @@
                         <td><a href="#">Product 1 Lorem ipsum dolor, sit amet consectetur adipisicing.</a></td>
                         <td>$65</td>
                         <td>&times;1</td>
-                        <td><button class="btn btn-danger"><i class="fa-regular fa-circle-xmark"></i></button>
+                        <td>
+                            <button class="btn btn-danger"><i class="fa-regular fa-circle-xmark"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -217,7 +215,8 @@
                         <td><a href="#">Product 2</a></td>
                         <td>$80</td>
                         <td>&times;2</td>
-                        <td><button class="btn btn-danger"><i class="fa-regular fa-circle-xmark"></i></button>
+                        <td>
+                            <button class="btn btn-danger"><i class="fa-regular fa-circle-xmark"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -226,7 +225,8 @@
                         <td><a href="#">Product 3</a></td>
                         <td>$100</td>
                         <td>&times;1</td>
-                        <td><button class="btn btn-danger"><i class="fa-regular fa-circle-xmark"></i></button>
+                        <td>
+                            <button class="btn btn-danger"><i class="fa-regular fa-circle-xmark"></i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -298,7 +298,6 @@
 <button id="top">
     <i class="fa-solid fa-angles-up"></i>
 </button>
-
 
 </body>
 
