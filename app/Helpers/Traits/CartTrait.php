@@ -7,7 +7,7 @@ use App\Helpers\Cart\Cart;
 trait CartTrait
 {
     public int $quantity = 1;
-    public function add2Cart(int $productId, $quantity = false)
+    public function add2Cart(int $productId, $quantity = false): void
     {
         $quantity = $quantity ? $this->quantity : 1;
 
@@ -21,6 +21,15 @@ trait CartTrait
         } else {
             $this->js("toastr.error('Oops! Something went wrong!')");
         }
+    }
 
+    public function removeFromCart(int $productId): void
+    {
+        if (Cart::removeProductFromCart($productId)) {
+            $this->js("toastr.success('Product removed from cart successfully!')");
+            $this->dispatch('cart-updated');
+        } else {
+            $this->js("toastr.error('Oops! Something went wrong!')");
+        }
     }
 }

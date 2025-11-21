@@ -33,6 +33,16 @@ class Cart
         return $added;
     }
     // remove product from cart
+    public static function removeProductFromCart(int $productId): bool
+    {
+        if (self::hasProductInCart($productId)) {
+            session()->forget("cart.{$productId}");
+
+            return true;
+        }
+
+        return false;
+    }
     // get cart
     public static function getCart(): array
     {
@@ -41,11 +51,24 @@ class Cart
 
     // clear cart
     // get cart total sum
+    public static function getCartTotalSum(): int
+    {
+        $total = 0;
+        $cart = self::getCart();
+
+        foreach ($cart as $item) {
+            $total += $item['quantity'] * $item['price'];
+        }
+
+        return $total;
+    }
+
     // get cart items
     public static function getCartQuantityItems(): int
     {
         return count(self::getCart());
     }
+
     // get cart quantity
     public static function getCartQuantityTotal(): int
     {
@@ -53,12 +76,11 @@ class Cart
 
         return array_sum(array_column($cart, 'quantity'));
     }
-// has prosuct in cart
+
+    // has prosuct in cart
     public static function hasProductInCart(int $productId): bool
     {
         return session()->has("cart.$productId");
     }
-// update item quantity
-
-
+    // update item quantity
 }
