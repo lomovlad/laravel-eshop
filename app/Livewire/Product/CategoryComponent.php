@@ -71,10 +71,12 @@ class CategoryComponent extends Component
             ->whereIn('category_id', explode(',', $ids))
             ->orderBy($this->sortList[$this->sort]['orderField'], $this->sortList[$this->sort]['orderDirection'])
             ->paginate($this->limit);
+        $breadcrumbs = \App\Helpers\Category\Category::getBreadcrumbs($category->id);
 
         return view('livewire.product.category-component', [
             'products' => $products,
             'category' => $category,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 }
