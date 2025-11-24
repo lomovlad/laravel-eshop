@@ -132,12 +132,6 @@
                                 <a class="nav-link active" aria-current="page" href="{{ route('home') }}" wire:navigate>Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('category') }}" wire:navigate>Category</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('product') }}" wire:navigate>Product</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="#">Payment</a>
                             </li>
                             <li class="nav-item">
@@ -150,33 +144,6 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     {!! \App\Helpers\Category\Category::getMenu('includes.menu-tpl', 'categories_html') !!}
-{{--                                    <li>--}}
-{{--                                        <a class="dropdown-item" href="category.html">Shoes</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a class="dropdown-item" href="category.html">Jeans</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="nav-item dropend">--}}
-{{--                                        <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"--}}
-{{--                                           data-bs-auto-close="outside">Sportswear</a>--}}
-{{--                                        <ul class="dropdown-menu dropdown-menu-end">--}}
-{{--                                            <li>--}}
-{{--                                                <a class="dropdown-item" href="category.html">Men's Sportswear</a>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <a class="dropdown-item" href="category.html">Women's Sportswear</a>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <a class="dropdown-item" href="category.html">Baby's Sportswear</a>--}}
-{{--                                            </li>--}}
-{{--                                        </ul>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a class="dropdown-item" href="category.html">Coat</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a class="dropdown-item" href="category.html">Shirts</a>--}}
-{{--                                    </li>--}}
                                 </ul>
                             </li>
                         </ul>
@@ -206,8 +173,6 @@
                     <h4>Information</h4>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('home') }}" wire:navigate>Home</a></li>
-                        <li><a href="{{ route('category') }}" wire:navigate>Category</a></li>
-                        <li><a href="{{ route('product') }}" wire:navigate>Product</a></li>
                         <li><a href="#">Contacts</a></li>
                     </ul>
                 </div>

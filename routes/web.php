@@ -7,4 +7,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeComponent::class)->name('home');
 Route::get('/product', ProductComponent::class)->name('product');
-Route::get('/category', CategoryComponent::class)->name('category');
+Route::get('/category/{slug}', CategoryComponent::class)->name('category');
