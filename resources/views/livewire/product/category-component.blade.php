@@ -4,9 +4,14 @@
             <div class="col-12">
                 <nav class="breadcrumbs">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><span>Category Name</span></li>
+                        <li><a href="{{ route('home') }}" wire:navigate>Home</a></li>
+                        @foreach($breadcrumbs as $breadcrumb_slug => $breadcrumb_title)
+                            @if($loop->last)
+                                <li><span>{{ $breadcrumb_title }}</span></li>
+                            @else
+                                <li><a href="{{ route('category', $breadcrumb_slug) }}">{{ $breadcrumb_title }}</a></li>
+                            @endif
+                        @endforeach
                     </ul>
                 </nav>
             </div>
@@ -166,7 +171,8 @@
                         <div class="col-sm-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Sort By:</span>
-                                <select class="form-select" aria-label="Sort by:" wire:change="changeSort" wire:model="sort">
+                                <select class="form-select" aria-label="Sort by:" wire:change="changeSort"
+                                        wire:model="sort">
                                     @foreach($sortList as $k => $item)
                                         <option value="{{ $k }}" @if($k === $sort) selected @endif wire:key="{{ $k }}">
                                             {{ $item['title'] }}
@@ -178,7 +184,8 @@
                         <div class="col-sm-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Show:</span>
-                                <select class="form-select" aria-label="Show:" wire:change="changeLimit" wire:model="limit">
+                                <select class="form-select" aria-label="Show:" wire:change="changeLimit"
+                                        wire:model="limit">
                                     @foreach($limitList as $k => $item)
                                         <option @if($k == $limit) selected @endif wire:key="{{ $k }}">
                                             {{ $item }}
