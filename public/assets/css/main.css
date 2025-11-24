@@ -127,6 +127,16 @@ img {
     list-style: none;
 }
 
+.update-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(255, 255, 255, .7);
+    padding-top: 50px;
+    z-index: 2;
+}
+
 /* ============================= General rules ============================ */
 .wrapper {
     min-height: 100%;

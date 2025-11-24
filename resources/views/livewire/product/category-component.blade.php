@@ -1,5 +1,5 @@
 <div>
-    <div class="container">
+    <div class="container" id="products">
         <div class="row">
             <div class="col-12">
                 <nav class="breadcrumbs">
@@ -13,7 +13,13 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container position-relative">
+        <div class="update-loading" wire:loading wire:target.except="add2Cart">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <div class="sidebar">
@@ -145,8 +151,6 @@
                             </form>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -185,6 +189,7 @@
                     </div>
 
                     <div class="row">
+
                         @foreach($products as $product)
                             <div class="col-lg-4 col-sm-6 mb-3" wire:key="{{ $product->id }}">
                                 @include('includes.product-card')
@@ -193,27 +198,14 @@
                         @endforeach
 
                     </div>
-
                     <div class="row">
                         <div class="col-12">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page"><a class="page-link"
-                                                                                        href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                </ul>
-                            </nav>
+                            {{ $products->links(data: ['scrollTo' => '#products']) }}
                         </div>
                     </div>
                 @else
                     Товаров нет :(
                 @endif
-
 
             </div>
         </div>
