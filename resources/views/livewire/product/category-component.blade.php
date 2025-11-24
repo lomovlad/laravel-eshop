@@ -166,23 +166,24 @@
                         <div class="col-sm-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Sort By:</span>
-                                <select class="form-select" aria-label="Sort by:">
-                                    <option selected>Default</option>
-                                    <option value="1">Name (a-z)</option>
-                                    <option value="2">Name (z-a)</option>
-                                    <option value="3">Price (low &gt; high)</option>
-                                    <option value="4">Price (high &gt; low)</option>
+                                <select class="form-select" aria-label="Sort by:" wire:change="changeSort" wire:model="sort">
+                                    @foreach($sortList as $k => $item)
+                                        <option value="{{ $k }}" @if($k === $sort) selected @endif wire:key="{{ $k }}">
+                                            {{ $item['title'] }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Show:</span>
-                                <select class="form-select" aria-label="Show:">
-                                    <option selected>9</option>
-                                    <option value="15">15</option>
-                                    <option value="30">30</option>
-                                    <option value="45">45</option>
+                                <select class="form-select" aria-label="Show:" wire:change="changeLimit" wire:model="limit">
+                                    @foreach($limitList as $k => $item)
+                                        <option @if($k == $limit) selected @endif wire:key="{{ $k }}">
+                                            {{ $item }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
