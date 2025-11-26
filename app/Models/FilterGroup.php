@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class FilterGroup extends Model
 {
-    //
+    protected $table = 'filter_groups';
+    protected $fillable = ['title'];
 }
