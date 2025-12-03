@@ -37,6 +37,11 @@
 
                     <div class="collapse collapse-filters" id="collapseFilters">
 
+                        <div class="filter-price">
+                            <input type="number" class="form-control" wire:model.live.debounce.500ms="min_price" value="{{ $min_price }}">
+                            <input type="number" class="form-control" wire:model.live.debounce.500ms="max_price" value="{{ $max_price }}">
+                        </div>
+
                         @foreach($filter_groups as $k => $filter_group)
                             <div class="filter-block" wire:key="{{ $k }}">
                                 <h5 class="section-title">
