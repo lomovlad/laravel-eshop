@@ -60,6 +60,15 @@ class CategoryComponent extends Component
         $this->slug = $slug;
     }
 
+    public function updated($property): void
+    {
+        $property = explode('.', $property);
+
+        if ($property[0] === 'selected_filters') {
+            $this->resetPage();
+        }
+    }
+
     public function changeSort(): void
     {
         $this->sort = isset($this->sortList[$this->sort]) ? $this->sort : 'default';
@@ -96,8 +105,6 @@ class CategoryComponent extends Component
         } else {
             $cntFilterGroups = 1;
         };
-
-
 
         $products = Product::query()
             ->whereIn('category_id', explode(',', $ids))
