@@ -625,6 +625,11 @@ footer a:hover {
     margin-bottom: 20px;
 }
 
+.selected-filters p {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
 /* ============================= Category Page ============================ */
 
 

@@ -86,6 +86,21 @@ class CategoryComponent extends Component
         $this->resetPage();
     }
 
+    public function removeFilter($filter_id): void
+    {
+        if (false !== ($key = array_search($filter_id, $this->selected_filters))) {
+            unset($this->selected_filters[$key]);
+            $this->selected_filters = array_values($this->selected_filters);
+            $this->resetPage();
+        }
+    }
+
+    public function clearFilters(): void
+    {
+        $this->selected_filters = [];
+        $this->resetPage();
+    }
+
     public function render()
     {
         $category = Category::query()->where('slug', '=', $this->slug)->firstOrFail();

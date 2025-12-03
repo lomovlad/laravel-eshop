@@ -37,9 +37,28 @@
 
                     <div class="collapse collapse-filters" id="collapseFilters">
 
+                        @if($selected_filters)
+                            <button class="btn btn-outline-warning mb-3 w-100" wire:click="clearFilters">
+                                Сбросить фильтры
+                            </button>
+                            <div class="selected-filters mb-3">
+                                @foreach($filter_groups as $filter_group)
+                                    @foreach($filter_group as $filter)
+                                        @if(in_array($filter->filter_id, $selected_filters))
+                                            <p class="mb-0" wire:click="removeFilter({{ $filter->filter_id }})" wire:key="{{ $filter->filter_id }}">
+                                                <i class="fa-solid fa-xmark text-danger"></i> {{ $filter->filter_title }}
+                                            </p>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        @endif
+
                         <div class="filter-price">
-                            <input type="number" class="form-control" wire:model.live.debounce.500ms="min_price" value="{{ $min_price }}">
-                            <input type="number" class="form-control" wire:model.live.debounce.500ms="max_price" value="{{ $max_price }}">
+                            <input type="number" class="form-control" wire:model.live.debounce.500ms="min_price"
+                                   value="{{ $min_price }}">
+                            <input type="number" class="form-control" wire:model.live.debounce.500ms="max_price"
+                                   value="{{ $max_price }}">
                         </div>
 
                         @foreach($filter_groups as $k => $filter_group)
@@ -48,7 +67,8 @@
                                     <span>Filter by {{ $filter_group[0]->title }}</span>
                                 </h5>
                                 @foreach($filter_group as $filter)
-                                    <div class="form-check d-flex justify-content-between" wire:key="{{ $filter->filter_id }}">
+                                    <div class="form-check d-flex justify-content-between"
+                                         wire:key="{{ $filter->filter_id }}">
                                         <div>
                                             <input
                                                 wire:model.live="selected_filters"
