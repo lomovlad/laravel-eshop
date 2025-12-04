@@ -21,7 +21,7 @@ class Cart
                 $newProduct = [
                     'title' => $product->title,
                     'slug' => $product->slug,
-                    'image' => $product->image,
+                    'image' => $product->getImage(),
                     'price' => $product->price,
                     'quantity' => $quantity,
                 ];
@@ -77,7 +77,7 @@ class Cart
         return array_sum(array_column($cart, 'quantity'));
     }
 
-    // has prosuct in cart
+    // has product in cart
     public static function hasProductInCart(int $productId): bool
     {
         return session()->has("cart.$productId");

@@ -9,7 +9,7 @@
     </div>
     <div class="product-thumb">
         <a href="{{ route('product', $product->slug) }}" wire:navigate>
-            <img src="{{ asset($product->image) }}" alt="">
+            <img src="{{ asset($product->getImage()) }}" alt="">
         </a>
     </div>
     <div class="product-details">

@@ -5,9 +5,12 @@
                 <nav class="breadcrumbs">
                     <ul>
                         <li><a href="{{ route('home') }}" wire:navigate>Home</a></li>
+
                         @foreach($breadcrumbs as $breadcrumb_slug => $breadcrumb_title)
-                            <li><a href="{{ route('category', $breadcrumb_slug) }}" wire:navigate>{{ $breadcrumb_title }}</a></li>
+                            <li><a href="{{ route('category', $breadcrumb_slug) }}"
+                                   wire:navigate>{{ $breadcrumb_title }}</a></li>
                         @endforeach
+
                         <li><span>{{ $product->title }}</span></li>
                     </ul>
                 </nav>
@@ -22,57 +25,59 @@
                     <div id="carouselExampleFade" class="carousel carousel-dark slide carousel-fade">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="assets/img/products/1.jpg" class="d-block w-100" alt="...">
+                                <img src="{{ asset($product->getImage()) }}" class="d-block w-100" alt="...">
                             </div>
-                            <div class="carousel-item">
-                                <img src="assets/img/products/2.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/img/products/3.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/img/products/4.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/img/products/5.jpg" class="d-block w-100" alt="...">
-                            </div>
+
+                            @foreach($product->gallery as $item)
+                                <div class="carousel-item">
+                                    <img src="{{ asset($item) }}" class="d-block w-100" alt="...">
+                                </div>
+                            @endforeach
+
                         </div>
-                        <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+
+                        @if($product->gallery)
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        @endif
+
                     </div>
                 </div>
             </div>
-
             <div class="col-md-7 col-lg-8 mb-3">
                 <div class="bg-white product-content p-3 h-100">
-                    <h1 class="section-title h3"><span>Product Name</span></h1>
-
+                    <h1 class="section-title h3"><span>{{ $product->title }}</span></h1>
                     <div class="product-price">
-                        <small>$70</small>
-                        $65
+
+                        @if($product->old_price)
+                            <small>{{ $product->old_price }}</small>
+                        @endif
+
+                        ${{ $product->price }}
                     </div>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ducimus adipisci alias,
-                        minus totam fugiat quia unde ipsum aliquam suscipit officia ut iure sunt quis,
-                        doloremque quibusdam, similique eos veritatis.</p>
-
+                    <p>{{ $product->excerpt }}</p>
                     <div class="product-add2cart">
                         <div class="input-group">
-                            <input type="number" class="form-control" value="1" min="1">
-                            <button class="btn btn-warning"><i class="fas fa-shopping-cart"></i> Add to
-                                cart
+                            <input type="number" class="form-control" value="{{ $quantity }}" min="1" wire:model="quantity">
+                            <button class="btn btn-warning" wire:click="add2Cart({{ $product->id }}, true)" wire:loading.attr="disabled">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Add to cart</span>
+                                <div wire:loading wire:target="add2Cart({{ $product->id }}, true)">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
                             </button>
                         </div>
                     </div>
-
                     <div class="row mt-3">
                         <div class="col-lg-4 mb-2">
                             <div class="card h-100">
@@ -118,7 +123,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col-12">
                 <div class="product-content-details bg-white p-4">
@@ -129,42 +133,40 @@
                                     aria-controls="description-tab-pane" aria-selected="true">Description
                             </button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="features-tab" data-bs-toggle="tab"
-                                    data-bs-target="#features-tab-pane" type="button" role="tab"
-                                    aria-controls="features-tab-pane" aria-selected="false">Features
-                            </button>
-                        </li>
+
+                        @if($attributes->isNotEmpty())
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="features-tab" data-bs-toggle="tab"
+                                        data-bs-target="#features-tab-pane" type="button" role="tab"
+                                        aria-controls="features-tab-pane" aria-selected="false">Features
+                                </button>
+                            </li>
+                        @endif
+
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
                              aria-labelledby="description-tab" tabindex="0">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure numquam ratione
-                                voluptatibus reiciendis? Vitae ex nesciunt repudiandae sunt deserunt! Quis
-                                numquam cum architecto illum, officia quo possimus! Earum, illo quaerat!</p>
-                            <p>Dolores illum sed officia? Assumenda iusto quis exercitationem eligendi, totam
-                                laudantium dignissimos quae corrupti soluta quasi ipsum nemo recusandae!
-                                Recusandae quibusdam maiores beatae et inventore architecto amet obcaecati vel
-                                neque.</p>
-                            <p>Obcaecati libero atque, excepturi facere magnam nulla, iure tempora ipsum dolorem
-                                autem eius cum exercitationem ad perspiciatis laboriosam rerum! Id, unde
-                                recusandae velit quam exercitationem quia minus nihil molestias dolorem?</p>
+                            {!! $product->content !!}
                         </div>
-                        <div class="tab-pane fade" id="features-tab-pane" role="tabpanel"
-                             aria-labelledby="features-tab" tabindex="0">
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th scope="row">Colors</th>
-                                    <td>white, black, pink</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Sizes</th>
-                                    <td>S, M, L</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+
+                        @if($attributes->isNotEmpty())
+                            <div class="tab-pane fade" id="features-tab-pane" role="tabpanel"
+                                 aria-labelledby="features-tab" tabindex="0">
+                                <table class="table">
+                                    <tbody>
+
+                                    @foreach($attributes as $attribute)
+                                        <tr>
+                                            <th scope="row">{{ $attribute->filter_groups_title }}</th>
+                                            <td>{{ $attribute->filters_title }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
 
                     </div>
                 </div>
@@ -172,229 +174,29 @@
         </div>
     </div>
 
-    <section class="new-products">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h2 class="section-title">
-                        <span>Новинки</span>
-                    </h2>
+    @if(count($related_products))
+        <section class="new-products">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h2 class="section-title">
+                            <span>Related products</span>
+                        </h2>
+                    </div>
                 </div>
+
+                <div class="owl-carousel owl-theme owl-carousel-full" wire:ignore>
+                    @foreach($related_products as $product)
+                        <div wire:key="{{ $product->id }}">
+                            @include('includes.product-card')
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
+        </section>
+    @endif
 
-            <div class="owl-carousel owl-theme owl-carousel-full">
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <div class="offer-hit">Hit</div>
-                        <div class="offer-new">New</div>
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/1.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 1 Lorem ipsum dolor, sit amet consectetur
-                                adipisicing.</a>
-                        </h4>
-                        <p class="product-excerpt">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                            Placeat, aperiam!</p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                <small>$70</small>
-                                $65
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <div class="offer-hit">Hit</div>
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/2.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 2</a>
-                        </h4>
-                        <p class="product-excerpt">Lorem ipsum dolor</p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                $65
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <!-- <div class="offer-hit">Hit</div>
-                        <div class="offer-new">New</div> -->
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/3.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 3 Lorem ipsum</a>
-                        </h4>
-                        <p class="product-excerpt">Lorem ipsum</p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                $100
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <div class="offer-hit">Hit</div>
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/4.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 4</a>
-                        </h4>
-                        <p class="product-excerpt">Lorem ipsum dolor</p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                <small>$70</small>
-                                $65
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <div class="offer-hit">Hit</div>
-                        <div class="offer-new">New</div>
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/5.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 5 Lorem ipsum dolor, sit amet consectetur
-                                adipisicing.</a>
-                        </h4>
-                        <p class="product-excerpt">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                            Placeat, aperiam!</p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                <small>$70</small>
-                                $65
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <div class="offer-hit">Hit</div>
-                        <div class="offer-new">New</div>
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/6.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 6</a>
-                        </h4>
-                        <p class="product-excerpt"></p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                <small>$70</small>
-                                $65
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <div class="offer-hit">Hit</div>
-                        <div class="offer-new">New</div>
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/7.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 7</a>
-                        </h4>
-                        <p class="product-excerpt">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                            Placeat, aperiam!</p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                <small>$70</small>
-                                $65
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-card-offer">
-                        <div class="offer-hit">Hit</div>
-                        <div class="offer-new">New</div>
-                    </div>
-                    <div class="product-thumb">
-                        <a href="product.html"><img src="assets/img/products/8.jpg" alt=""></a>
-                    </div>
-                    <div class="product-details">
-                        <h4>
-                            <a href="product.html">Product 8 Lorem</a>
-                        </h4>
-                        <p class="product-excerpt">Lorem ipsum dolor</p>
-                        <div class="product-bottom-details d-flex justify-content-between">
-                            <div class="product-price">
-                                <small>$70</small>
-                                $65
-                            </div>
-                            <div class="product-links">
-                                <a href="#" class="btn btn-outline-secondary add-to-cart"><i
-                                        class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
 </div>
 
 @script
