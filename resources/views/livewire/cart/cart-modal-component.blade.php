@@ -14,7 +14,7 @@
                                 <a href=""><img src="{{ asset($item['image']) }}" alt=""></a>
                             </td>
                             <td>
-                                <a href="{{ route('product') }}">{{ $item['title'] }}</a>
+                                <a href="{{ route('product', $item['slug']) }}">{{ $item['title'] }}</a>
                             </td>
                             <td>${{ $item['price'] }}</td>
                             <td>&times;{{ $item['quantity'] }}</td>

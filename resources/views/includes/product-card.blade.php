@@ -8,13 +8,13 @@
         @endif
     </div>
     <div class="product-thumb">
-        <a href="#">
+        <a href="{{ route('product', $product->slug) }}" wire:navigate>
             <img src="{{ asset($product->image) }}" alt="">
         </a>
     </div>
     <div class="product-details">
         <h4>
-            <a href="#">
+            <a href="{{ route('product', $product->slug) }}" wire:navigate>
                 {{ $product->title }}
             </a>
         </h4>
