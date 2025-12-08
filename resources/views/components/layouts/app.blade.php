@@ -59,25 +59,7 @@
                     </div>
 
                     <div class="col-6 col-sm-4">
-                        <div class="header-top-account d-flex justify-content-end">
-                            <div class="btn-group me-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm dropdown-toggle" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                        Account
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item" href="#">Sign In</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Sign Up</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./header-top-account -->
+                        <livewire:user.nav-component />
                     </div>
                 </div>
             </div>
