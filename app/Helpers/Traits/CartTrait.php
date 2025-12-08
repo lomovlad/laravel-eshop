@@ -32,4 +32,25 @@ trait CartTrait
             $this->js("toastr.error('Oops! Something went wrong!')");
         }
     }
+
+    public function updateItemQuantity(int $productId, int $quantity): void
+    {
+        if ($quantity <= 0) {
+            $quantity = 1;
+        }
+
+        if (Cart::updateItemQuantity($productId, $quantity)) {
+            $this->dispatch('cart-updated');
+            $this->js("toastr.success('Quantity updated')");
+        } else {
+            $this->js("toastr.error('Error quantity updated')");
+        }
+    }
+
+    public function clearCart(): void
+    {
+        Cart::clearCart();
+        $this->dispatch('cart-updated');
+        $this->js("toastr.success('Cart cleared!')");
+    }
 }

@@ -50,6 +50,10 @@ class Cart
     }
 
     // clear cart
+    public static function clearCart(): void
+    {
+        session()->forget('cart');
+    }
     // get cart total sum
     public static function getCartTotalSum(): int
     {
@@ -83,4 +87,15 @@ class Cart
         return session()->has("cart.$productId");
     }
     // update item quantity
+    public static function updateItemQuantity(int $productId, int $quantity): bool
+    {
+        $updated = false;
+
+        if (self::hasProductInCart($productId)) {
+            session(["cart.{$productId}.quantity" => $quantity]);
+            $updated = true;
+        }
+
+        return $updated;
+    }
 }

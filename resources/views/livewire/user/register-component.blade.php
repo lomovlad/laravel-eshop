@@ -4,7 +4,7 @@
             <div class="col-12">
                 <nav class="breadcrumbs">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li><span>Registration</span></li>
                     </ul>
                 </nav>
@@ -27,7 +27,7 @@
                                     <input wire:model="name" type="text"
                                            class="form-control @error('name') is-invalid @enderror" id="name"
                                            placeholder="Name"
-                                           required1>
+                                           required>
                                     @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -40,7 +40,7 @@
                                     <input wire:model="email" type="email"
                                            class="form-control @error('email') is-invalid @enderror" id="email"
                                            placeholder="Email"
-                                           required1>
+                                           required>
                                     @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -52,7 +52,7 @@
                                     <label for="password" class="form-label required">Password</label>
                                     <input wire:model="password" type="password"
                                            class="form-control @error('password') is-invalid @enderror" id="password"
-                                           placeholder="Password" required1>
+                                           placeholder="Password" required>
                                     @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}

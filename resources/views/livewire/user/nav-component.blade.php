@@ -8,7 +8,7 @@
             <ul class="dropdown-menu">
                 @guest()
                     <li>
-                        <a class="dropdown-item" href="#">Sign In</a>
+                        <a class="dropdown-item" href="{{ route('login') }}" wire:navigate>Sign In</a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('register') }}" wire:navigate>Sign Up</a>
@@ -20,7 +20,7 @@
                         <a class="dropdown-item" href="#">Your account</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" wire:navigate>Logout</a>
                     </li>
 
                 @endauth
