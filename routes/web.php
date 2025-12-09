@@ -5,7 +5,11 @@ use App\Livewire\Cart\CheckoutComponent;
 use App\Livewire\HomeComponent;
 use App\Livewire\Product\CategoryComponent;
 use App\Livewire\Product\ProductComponent;
+use App\Livewire\User\AccountComponent;
+use App\Livewire\User\ChangeAccountComponent;
 use App\Livewire\User\LoginComponent;
+use App\Livewire\User\OrdersComponent;
+use App\Livewire\User\OrderShowComponent;
 use App\Livewire\User\RegisterComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +29,8 @@ Route::middleware('auth')->group(function () {
         auth()->logout();
         return redirect()->route('login');
     })->name('logout');
+    Route::get('/account', AccountComponent::class)->name('account');
+    Route::get('/change-account', ChangeAccountComponent::class)->name('change-account');
+    Route::get('/orders', OrdersComponent::class)->name('orders');
+    Route::get('/order-show/{id}', OrderShowComponent::class)->name('order-show');
 });
