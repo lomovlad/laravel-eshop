@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Cart;
 
+use App\Mail\OrderClient;
+use App\Mail\OrderManager;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
@@ -49,15 +52,26 @@ class CheckoutComponent extends Component
             }
 
             $order->orderProducts()->createMany($orderProducts);
+
+            Mail::to($validated['email'])->send(
+                new OrderClient($orderProducts,
+                    \App\Helpers\Cart\Cart::getCartTotalSum(),
+                    $order->id,
+                    $validated['note']
+                ));
+            Mail::to('manager@laravel-eshop.org')->send(new OrderManager($order->id));
+
+            \App\Helpers\Cart\Cart::clearCart();
+            $this->dispatch('cart-updated');
             $this->js("toastr.success('Order created!')");
             DB::commit();
-
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             $this->js("toastr.error('Error ordering')");
         }
     }
+
     public function render()
     {
         return view('livewire.cart.checkout-component');
