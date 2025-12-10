@@ -42,6 +42,7 @@ class ProductComponent extends Component
             'related_products' => $relatedProducts,
             'breadcrumbs' => $breadcrumbs,
             'attributes' => $attributes,
+            'title' => "Product - {$product->title}",
         ]);
     }
 }

@@ -1,4 +1,8 @@
 <div>
+    @section('meta-tags')
+        <title>{{ config('app.name') . ' :: ' . ($title ?? 'Page Title') }}</title>
+        <meta name="description" content="Default metadesc">
+    @endsection
     <div class="container" id="products">
         <div class="row">
             <div class="col-12">
@@ -149,3 +153,11 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    $wire.on('page-updated', data => {
+        document.title = data.title;
+    })
+</script>
+@endscript
