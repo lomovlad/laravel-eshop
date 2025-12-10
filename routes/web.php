@@ -5,6 +5,7 @@ use App\Livewire\Cart\CheckoutComponent;
 use App\Livewire\HomeComponent;
 use App\Livewire\Product\CategoryComponent;
 use App\Livewire\Product\ProductComponent;
+use App\Livewire\Search\SearchComponent;
 use App\Livewire\User\AccountComponent;
 use App\Livewire\User\ChangeAccountComponent;
 use App\Livewire\User\LoginComponent;
@@ -18,6 +19,7 @@ Route::get('/product/{slug}', ProductComponent::class)->name('product');
 Route::get('/category/{slug}', CategoryComponent::class)->name('category');
 Route::get('/cart', Cart::class)->name('cart');
 Route::get('/checkout', CheckoutComponent::class)->name('checkout');
+Route::get('/search', SearchComponent::class)->name('search');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', RegisterComponent::class)->name('register');

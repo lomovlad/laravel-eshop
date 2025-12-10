@@ -18,6 +18,8 @@ class CategoryComponent extends Component
 
     public string $slug = '';
 
+    public string $categoryTitle = '';
+
     #[Url]
     public string $sort = 'default';
     public array $sortList = [
@@ -77,6 +79,12 @@ class CategoryComponent extends Component
         if (in_array($property[0], ['selected_filters', 'min_price', 'max_price'])) {
             $this->resetPage();
         }
+    }
+
+    public function updatedPage($page)
+    {
+        $pageTitle = $page > 1 ? " :: Page - {$page}" : "Page - 1";
+        $this->dispatch('page-updated', title: config('app.name') . "Category {$this->categoryTitle}$pageTitle");
     }
 
     public function changeSort(): void
@@ -153,6 +161,14 @@ class CategoryComponent extends Component
             ->whereBetween('price', [$this->min_price, $this->max_price])
             ->orderBy($this->sortList[$this->sort]['orderField'], $this->sortList[$this->sort]['orderDirection'])
             ->paginate($this->limit);
+        $page = request()->query('page', 1);
+
+        if ($page > $products->lastPage()) {
+            abort(404);
+        }
+
+        $this->categoryTitle = $category->title;
+        $title = "Category {$category->title} " . ($page ? " :: Page - {$page}" : '');
         $breadcrumbs = \App\Helpers\Category\Category::getBreadcrumbs($category->id);
 
         return view('livewire.product.category-component', [
@@ -160,6 +176,7 @@ class CategoryComponent extends Component
             'category' => $category,
             'breadcrumbs' => $breadcrumbs,
             'filter_groups' => $filter_groups,
+            'title' => $title,
         ]);
     }
 }

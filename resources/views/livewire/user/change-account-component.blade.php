@@ -1,4 +1,8 @@
 <div>
+    @section('meta-tags')
+        <title>{{ config('app.name') . ' :: ' . ($title ?? 'Page Title') }}</title>
+        <meta name="description" content="Default metadesc">
+    @endsection
     <div class="container">
         <div class="row">
             <div class="col-12">

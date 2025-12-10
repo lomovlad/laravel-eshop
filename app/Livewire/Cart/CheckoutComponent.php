@@ -52,19 +52,21 @@ class CheckoutComponent extends Component
             }
 
             $order->orderProducts()->createMany($orderProducts);
-
-            Mail::to($validated['email'])->send(
-                new OrderClient($orderProducts,
-                    \App\Helpers\Cart\Cart::getCartTotalSum(),
-                    $order->id,
-                    $validated['note']
-                ));
-            Mail::to('manager@laravel-eshop.org')->send(new OrderManager($order->id));
-
+            DB::commit();
+            try {
+                Mail::to($validated['email'])->send(
+                    new OrderClient($orderProducts,
+                        \App\Helpers\Cart\Cart::getCartTotalSum(),
+                        $order->id,
+                        $validated['note']
+                    ));
+                Mail::to('manager@laravel-eshop.org')->send(new OrderManager($order->id));
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+            }
             \App\Helpers\Cart\Cart::clearCart();
             $this->dispatch('cart-updated');
             $this->js("toastr.success('Order created!')");
-            DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
@@ -74,6 +76,8 @@ class CheckoutComponent extends Component
 
     public function render()
     {
-        return view('livewire.cart.checkout-component');
+        return view('livewire.cart.checkout-component', [
+            'title' => "Checkout",
+        ]);
     }
 }

@@ -1,4 +1,8 @@
 <div class="product-card">
+    @section('meta-tags')
+        <title>{{ config('app.name') . ' :: ' . ($title ?? 'Page Title') }}</title>
+        <meta name="description" content="Default metadesc">
+    @endsection
     <div class="product-card-offer">
         @if($product->is_new)
             <div class="offer-new">New</div>

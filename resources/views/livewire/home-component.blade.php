@@ -1,4 +1,8 @@
 <div>
+    @section('meta-tags')
+        <title>{{ config('app.name') . ' :: ' . ($title ?? 'Page Title') }}</title>
+        <meta name="description" content="Default metadesc">
+    @endsection
     <div id="carousel" class="carousel slide carousel-fade">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"

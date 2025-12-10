@@ -4,7 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'Page Title' }}</title>
+
+    @section('meta-tags')
+        <title>{{ config('app.name') . ' :: ' . ($title ?? 'Page Title') }}</title>
+        <meta name="description" content="Default metadesc">
+    @show
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -74,17 +79,7 @@
                         <a href="{{ route('home') }}" class="header-logo h1" wire:navigate>E-Shop</a>
                     </div>
 
-                    <div class="col-sm-6 mt-2 mt-md-0">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="s" placeholder="Searching..."
-                                       aria-label="Searching..." aria-describedby="button-search">
-                                <button class="btn btn-outline-warning" type="submit" id="button-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <livewire:search.search-form-component />
 
                 </div>
             </div>
