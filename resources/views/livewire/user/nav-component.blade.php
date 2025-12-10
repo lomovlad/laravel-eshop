@@ -17,7 +17,7 @@
 
                 @auth
                     <li>
-                        <a class="dropdown-item" href="#">Your account</a>
+                        <a class="dropdown-item" href="{{ route('account') }}" wire:navigate>Your account</a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}" wire:navigate>Logout</a>
