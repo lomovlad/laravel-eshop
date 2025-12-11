@@ -20,14 +20,14 @@
                         <a class="dropdown-item" href="{{ route('account') }}" wire:navigate>Your account</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}" wire:navigate>Logout</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                     </li>
 
                 @endauth
 
                 @if(auth()->user() && auth()->user()->is_admin)
                     <li>
-                        <a class="dropdown-item" href="#">Dashboard</a>
+                        <a class="dropdown-item" href="{{ route('admin') }}">Dashboard</a>
                     </li>
                 @endif
             </ul>
