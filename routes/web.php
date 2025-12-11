@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\Category\CategoryCreateComponent;
 use App\Livewire\Admin\Category\CategoryIndexComponent;
 use App\Livewire\Cart\Cart;
 use App\Livewire\Cart\CheckoutComponent;
@@ -40,4 +41,5 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', \App\Livewire\Admin\HomeComponent::class)->name('admin');
     Route::get('/categories', CategoryIndexComponent::class)->name('admin.categories.index');
+    Route::get('/categories/create', CategoryCreateComponent::class)->name('admin.categories.create');
 });
