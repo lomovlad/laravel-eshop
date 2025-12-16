@@ -22,7 +22,8 @@
 
                     <div class="mb-3">
                         <label for="parent_id" class="form-label required">Parent category</label>
-                        <select wire:model="parent_id" id="parent_id" class="custom-select @error('parent_id') is-invalid @enderror">
+                        <select wire:model="parent_id" id="parent_id"
+                                class="custom-select @error('parent_id') is-invalid @enderror">
                             <option value="0" wire:key="0">Root category</option>
                             {!! \App\Helpers\Category\Category::getMenu('includes.menu-select-tpl') !!}
                         </select>
@@ -31,6 +32,28 @@
                             {{ $message }}
                         </div>
                         @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="card">
+                            <div class="card-header">Filters</div>
+                            <div class="card-body">
+                                @foreach($filter_groups as $filter_group)
+                                    <div class="form-check" wire:key="{{ $filter_group->id }}">
+                                        <input class="form-check-input" type="checkbox" value="{{ $filter_group->id }}"
+                                               id="filter-{{ $filter_group->id }}" wire:model="selectedCategoryFilters">
+                                        <label class="form-check-label" for="filter-{{ $filter_group->id }}">
+                                            {{ $filter_group->title }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                                @error('selectedCategoryFilters.*')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mb-3">

@@ -21,7 +21,6 @@ class HomeComponent extends Component
         $orders_cnt = Order::query()->count();
         $orders_total = Order::query()->sum('total');
 
-
         return view('livewire.admin.home-component', compact('products_cnt', 'users_cnt', 'orders_cnt', 'orders_total'));
     }
 }
