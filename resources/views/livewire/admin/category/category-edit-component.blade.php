@@ -22,8 +22,7 @@
 
                     <div class="mb-3">
                         <label for="parent_id" class="form-label required">Parent category</label>
-                        <select wire:model="parent_id" id="parent_id"
-                                class="custom-select @error('parent_id') is-invalid @enderror">
+                        <select wire:model="parent_id" id="parent_id" class="custom-select @error('parent_id') is-invalid @enderror">
                             <option value="0" wire:key="0">Root category</option>
                             {!! \App\Helpers\Category\Category::getMenu('includes.menu-select-tpl') !!}
                         </select>
