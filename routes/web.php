@@ -3,6 +3,9 @@
 use App\Livewire\Admin\Category\CategoryCreateComponent;
 use App\Livewire\Admin\Category\CategoryEditComponent;
 use App\Livewire\Admin\Category\CategoryIndexComponent;
+use App\Livewire\Admin\Product\ProductCreateComponent;
+use App\Livewire\Admin\Product\ProductEditComponent;
+use App\Livewire\Admin\Product\ProductIndexComponent;
 use App\Livewire\Cart\Cart;
 use App\Livewire\Cart\CheckoutComponent;
 use App\Livewire\Product\CategoryComponent;
@@ -41,7 +44,12 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', \App\Livewire\Admin\HomeComponent::class)->name('admin');
+
     Route::get('/categories', CategoryIndexComponent::class)->name('admin.categories.index');
     Route::get('/categories/create', CategoryCreateComponent::class)->name('admin.categories.create');
     Route::get('/categories/{category}/edit', CategoryEditComponent::class)->name('admin.categories.edit');
+
+    Route::get('/products', ProductIndexComponent::class)->name('admin.products.index');
+    Route::get('/products/create', ProductCreateComponent::class)->name('admin.products.create');
+    Route::get('/products/{product}/edit', ProductEditComponent::class)->name('admin.products.edit');
 });
