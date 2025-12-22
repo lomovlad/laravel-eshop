@@ -127,10 +127,12 @@
 
                     <div class="mb-3">
                         <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" rows="10"
-                                  placeholder="Product content" wire:model="content"></textarea>
+                        <div class="" wire:ignore>
+                            <textarea class="form-control @error('content') is-invalid @enderror" id="summernote" rows="10"
+                                      placeholder="Product content" wire:model="content"></textarea>
+                        </div>
                         @error('content')
-                        <div class="invalid-feedback">
+                        <div class="text-danger">
                             {{ $message }}
                         </div>
                         @enderror
@@ -199,3 +201,17 @@
 
 </div>
 
+@script
+<script>
+    $(function () {
+        $('#summernote').summernote({
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    $wire.$set('content', contents, false);
+                }
+            },
+            height: 300
+        });
+    })
+</script>
+@endscript
