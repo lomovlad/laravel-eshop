@@ -74,11 +74,6 @@ class ProductCreateComponent extends Component
         ];
     }
 
-    public function updatedCategoryId()
-    {
-        $this->selectedFilters = [];
-    }
-
     public function save()
     {
         $validated = $this->validate();

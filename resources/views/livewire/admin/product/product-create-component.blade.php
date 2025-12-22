@@ -203,13 +203,15 @@
 
 @script
 <script>
-    $('#summernote').summernote({
-        callbacks: {
-            onChange: function(contents, $editable) {
-                $wire.$set('content', contents, false);
-            }
-        },
-        height: 300
-    });
+    $(function () {
+        $('#summernote').summernote({
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    $wire.$set('content', contents, false);
+                }
+            },
+            height: 300
+        });
+    })
 </script>
 @endscript
