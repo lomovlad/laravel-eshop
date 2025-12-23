@@ -23,8 +23,8 @@ class ProductCreateComponent extends Component
     public string $title;
     public ?int $category_id = null;
     public array $selectedFilters = [];
-    public string $excerpt;
-    public string $content = '';
+    public $excerpt;
+    public $content = '';
     public int $price = 0;
     public int $old_price = 0;
     public bool $is_hit = false;
