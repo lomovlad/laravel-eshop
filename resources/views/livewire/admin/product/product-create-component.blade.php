@@ -126,6 +126,7 @@
                     </div>
 
                     <div class="mb-3">
+                        <livewire:admin.file-manager.file-manager-component/>
                         <label for="content" class="form-label">Content</label>
                         <div class="" wire:ignore>
                             <textarea class="form-control @error('content') is-invalid @enderror" id="summernote" rows="10"
