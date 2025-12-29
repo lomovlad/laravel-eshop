@@ -59,13 +59,8 @@
                                                    class="btn btn-warning" title="Copy url">
                                                     <i class="far fa-copy"></i>
                                                 </a>
-{{--                                                <p x-show="showMsg" @click.away="showMsg = false" class="media-copied"--}}
-{{--                                                   style="display: none;">Copied to Clipboard--}}
-{{--                                                </p>--}}
-                                                <p x-show="showMsg"
-                                                   style="display: none; position: absolute; z-index: 100; top: -30px; left: 0;"
-                                                   class="badge badge-success shadow-sm">
-                                                    Copied to Clipboard
+                                                <p x-show="showMsg" @click.away="showMsg = false" class="media-copied"
+                                                   style="display: none;">Copied to Clipboard
                                                 </p>
                                             </div>
                                         </div>
