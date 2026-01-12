@@ -3,6 +3,12 @@
 use App\Livewire\Admin\Category\CategoryCreateComponent;
 use App\Livewire\Admin\Category\CategoryEditComponent;
 use App\Livewire\Admin\Category\CategoryIndexComponent;
+use App\Livewire\Admin\Filter\FilterCreateComponent;
+use App\Livewire\Admin\Filter\FilterEditComponent;
+use App\Livewire\Admin\Filter\FilterGroupCreateComponent;
+use App\Livewire\Admin\Filter\FilterGroupEditComponent;
+use App\Livewire\Admin\Filter\FilterGroupIndexComponent;
+use App\Livewire\Admin\Filter\FilterIndexComponent;
 use App\Livewire\Admin\Product\ProductCreateComponent;
 use App\Livewire\Admin\Product\ProductEditComponent;
 use App\Livewire\Admin\Product\ProductIndexComponent;
@@ -52,4 +58,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/products', ProductIndexComponent::class)->name('admin.products.index');
     Route::get('/products/create', ProductCreateComponent::class)->name('admin.products.create');
     Route::get('/products/{product}/edit', ProductEditComponent::class)->name('admin.products.edit');
+
+    Route::get('/filter-groups', FilterGroupIndexComponent::class)->name('admin.filter-groups.index');
+    Route::get('/filter-groups/create', FilterGroupCreateComponent::class)->name('admin.filter-groups.create');
+    Route::get('/filter-groups/{filter_group}/edit', FilterGroupEditComponent::class)->name('admin.filter-groups.edit');
+
+    Route::get('/filters', FilterIndexComponent::class)->name('admin.filters.index');
+    Route::get('/filters/create', FilterCreateComponent::class)->name('admin.filters.create');
+    Route::get('/filters/{filter}/edit', FilterEditComponent::class)->name('admin.filters.edit');
 });

@@ -66,6 +66,29 @@
                 <span>Products</span></a>
         </li>
 
+        <hr class="sidebar-divider">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.filter-groups.index') }}" wire:navigate>
+                <i class="fa-solid fa-filter"></i>
+                <span>Filter Groups</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.filter-groups.create') }}" wire:navigate>
+                <i class="fa-solid fa-filter"></i>
+                <span>Add Filter Group</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.filters.index') }}" wire:navigate>
+                <i class="fa-solid fa-filter"></i>
+                <span>Filters List</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.filters.create') }}" wire:navigate>
+                <i class="fa-solid fa-filter"></i>
+                <span>Add Filter</span></a>
+        </li>
+        <hr class="sidebar-divider">
+
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>

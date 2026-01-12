@@ -126,9 +126,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <livewire:admin.file-manager.file-manager-component/>
                         <label for="content" class="form-label">Content</label>
                         <div class="" wire:ignore>
-                            <textarea class="form-control @error('content') is-invalid @enderror" id="summernote" rows="10"
+                            <textarea class="form-control @error('content') is-invalid @enderror" id="summernote"
+                                      rows="10"
                                       placeholder="Product content" wire:model="content"></textarea>
                         </div>
                         @error('content')
@@ -225,7 +227,7 @@
     $(function () {
         $('#summernote').summernote({
             callbacks: {
-                onChange: function(contents, $editable) {
+                onChange: function (contents, $editable) {
                     $wire.$set('content', contents, false);
                 }
             },
