@@ -2,10 +2,7 @@
 
 namespace App\Livewire\Admin\Filter;
 
-use App\Models\Category;
 use App\Models\FilterGroup;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
