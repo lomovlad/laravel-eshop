@@ -1,5 +1,10 @@
 <div class="row">
-    <div class="col-12 mb-4">
+    <div class="col-12 mb-4 position-relative">
+        <div class="update-loading" wire:loading wire:target="save">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
