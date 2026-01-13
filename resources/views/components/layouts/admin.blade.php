@@ -39,7 +39,8 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}" target="_blank">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}"
+           target="_blank">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -88,6 +89,11 @@
                 <span>Add Filter</span></a>
         </li>
         <hr class="sidebar-divider">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.orders.index') }}" wire:navigate>
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Orders</span></a>
+        </li>
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
