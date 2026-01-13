@@ -3,6 +3,8 @@
 namespace App\Livewire\Admin\Order;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -14,6 +16,21 @@ class OrderIndexComponent extends Component
 {
     use WithPagination;
 
+
+    public function deleteOrder(Order $order)
+    {
+        try {
+            DB::beginTransaction();
+            $order->orderProducts()->delete();
+            $order->delete();
+            DB::commit();
+            $this->js("toastr.success('Order removed')");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            $this->js("toastr.error('Error deleting order')");
+        }
+    }
     public function render()
     {
         $orders = Order::query()->orderBy('id', 'desc')->paginate(15);
