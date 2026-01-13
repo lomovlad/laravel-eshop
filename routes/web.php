@@ -9,6 +9,8 @@ use App\Livewire\Admin\Filter\FilterGroupCreateComponent;
 use App\Livewire\Admin\Filter\FilterGroupEditComponent;
 use App\Livewire\Admin\Filter\FilterGroupIndexComponent;
 use App\Livewire\Admin\Filter\FilterIndexComponent;
+use App\Livewire\Admin\Order\OrderEditComponent;
+use App\Livewire\Admin\Order\OrderIndexComponent;
 use App\Livewire\Admin\Product\ProductCreateComponent;
 use App\Livewire\Admin\Product\ProductEditComponent;
 use App\Livewire\Admin\Product\ProductIndexComponent;
@@ -66,4 +68,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/filters', FilterIndexComponent::class)->name('admin.filters.index');
     Route::get('/filters/create', FilterCreateComponent::class)->name('admin.filters.create');
     Route::get('/filters/{filter}/edit', FilterEditComponent::class)->name('admin.filters.edit');
+
+    Route::get('/orders', OrderIndexComponent::class)->name('admin.orders.index');
+    Route::get('/orders/{order}/edit', OrderEditComponent::class)->name('admin.orders.edit');
 });
