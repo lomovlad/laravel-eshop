@@ -42,8 +42,7 @@ class CategoryIndexComponent extends Component
             $category->delete();
             DB::commit();
             cache()->forget('categories_html');
-            session()->flash('success', "Category removed");
-            $this->redirectRoute('admin.categories.index', navigate: true);
+            $this->js("toastr.success('Category removed')");
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
