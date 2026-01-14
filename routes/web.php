@@ -14,6 +14,9 @@ use App\Livewire\Admin\Order\OrderIndexComponent;
 use App\Livewire\Admin\Product\ProductCreateComponent;
 use App\Livewire\Admin\Product\ProductEditComponent;
 use App\Livewire\Admin\Product\ProductIndexComponent;
+use App\Livewire\Admin\User\UserCreateComponent;
+use App\Livewire\Admin\User\UserEditComponent;
+use App\Livewire\Admin\User\UserIndexComponent;
 use App\Livewire\Cart\Cart;
 use App\Livewire\Cart\CheckoutComponent;
 use App\Livewire\Product\CategoryComponent;
@@ -71,4 +74,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get('/orders', OrderIndexComponent::class)->name('admin.orders.index');
     Route::get('/orders/{order}/edit', OrderEditComponent::class)->name('admin.orders.edit');
+
+    Route::get('/users', UserIndexComponent::class)->name('admin.users.index');
+    Route::get('/users/create', UserCreateComponent::class)->name('admin.users.create');
+    Route::get('/users/{user}/edit', UserEditComponent::class)->name('admin.users.edit');
 });
