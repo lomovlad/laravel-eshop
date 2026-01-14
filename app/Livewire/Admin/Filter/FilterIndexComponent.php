@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('components.layouts.admin')]
-#[Title('Filter List')]
+#[Title('Filters List')]
 class FilterIndexComponent extends Component
 {
     use WithPagination;
