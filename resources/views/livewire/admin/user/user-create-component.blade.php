@@ -55,13 +55,7 @@
                             <input type="checkbox" wire:model="is_admin">
                             <span class="slider round"></span>
                         </label>
-                        @error('is_admin')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
                     </div>
-
                     <div class="mb-3">
                         <button type="submit" class="btn btn-info">
                             Save
