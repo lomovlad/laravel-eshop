@@ -70,3 +70,16 @@
 - **Version control:** Git
 
 ---
+
+## Установка и запуск
+
+```bash
+git clone https://github.com/lomovlad/ecommerce-platform.git
+cd ecommerce-platform
+
+composer install
+cp .env.example .env
+php artisan key:generate
+
+php artisan migrate --seed
+php artisan serve
